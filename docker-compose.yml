@@ -1,0 +1,21 @@
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: wpp_bot_waha
+    restart: always
+    ports:
+      - '3000:3000'
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: wpp_bot_api
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/app
+      - ./chroma_data:/app/chroma_data
+      - S:/Code/gemini-api-453021-40c16f59f05d.json:/app/gemini-api-453021-40c16f59f05d.json
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gemini-api-453021-40c16f59f05d.json
