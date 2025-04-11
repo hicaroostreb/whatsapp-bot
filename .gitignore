@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Arquivos de cache e compilação
 __pycache__/
 *.pyc
@@ -12,8 +11,6 @@ venv/
 
 # Arquivos de configuração sensíveis
 .env
-=======
 # Ignorar arquivos de credenciais
 *gemini-api-453021-40c16f59f05d.json
 *.env
->>>>>>> ec9ef11c8eca2bd959277abecfa62d222c9ebd04
