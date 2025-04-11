@@ -1,1 +1,13 @@
+# Arquivos de cache e compilação
+__pycache__/
+*.pyc
+
+# Ambiente virtual
+venv/
+
+# Arquivos de configuração local
+.vscode/
+.idea/
+
+# Arquivos de configuração sensíveis
 .env
