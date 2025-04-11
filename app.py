@@ -16,6 +16,10 @@ app.message_timers = {}  # Controla timers para cada chat
 app.message_histories = {}  # Armazena históricos de mensagens para cada chat (corrigido)
 WAIT_TIME = 10  # Segundos para aguardar mais mensagens
 
+# Instanciando objetos fora das funções para evitar instanciamento repetido
+waha = Waha()
+ai_bot = AIBot()
+
 
 @app.route("/chatbot/webhook/", methods=["POST"])
 def webhook():
@@ -57,6 +61,17 @@ def webhook():
     return jsonify({"status": "success"}), 200
 
 
+def command_zerar(chat_id):
+    """Lida com o comando --zerar, que reseta o histórico do chat."""
+
+    # Apaga o histórico de mensagens desse chat específico
+    if chat_id in app.message_histories:
+        app.message_histories[chat_id] = []  # Limpa o histórico armazenado
+
+    # Retorna uma resposta informando que o histórico foi resetado
+    return "Histórico de conversa zerado! Podemos começar de novo."
+
+
 def add_to_pending(chat_id, message_text, message_id, user_name):
     """Adiciona mensagem à lista de pendentes"""
     if chat_id not in app.pending_messages:
@@ -85,21 +100,26 @@ def setup_processing_timer(chat_id):
 
 def process_messages(chat_id):
     """Processa as mensagens pendentes após o tempo de espera"""
-    # Verifica se há mensagens para processar
     if chat_id not in app.pending_messages or not app.pending_messages[chat_id]:
         return
 
-    # Obtém e limpa mensagens pendentes
     messages = app.pending_messages[chat_id].copy()
     app.pending_messages[chat_id] = []
 
-    # Combina as mensagens recentes
-    combined_message = " ".join([msg["text"] for msg in messages])
+    combined_message = " ".join([msg["text"] for msg in messages]).strip()
     user_name = messages[0].get("user_name", "")
 
-    # Inicia o processamento da IA
-    waha = Waha()
-    ai_bot = AIBot()
+    # Verifica se o comando --zerar foi usado
+    if combined_message.lower() == "--zerar":
+        # Limpa o histórico
+        if chat_id in app.message_histories:
+            app.message_histories[chat_id] = []
+
+        # Envia uma mensagem técnica de sistema, não do bot
+        waha.send_message(chat_id=chat_id, message="✅ Histórico zerado.")
+
+        # Não continua o fluxo de IA nem salva esse comando no histórico
+        return
 
     # Simula digitação natural
     time.sleep(random.randint(1, 3))
@@ -107,17 +127,14 @@ def process_messages(chat_id):
     time.sleep(random.randint(5, 7))
 
     try:
-        # Obtém histórico acumulado com limpeza
         history_messages = get_clean_history(waha, chat_id)
 
-        # Gera resposta com a IA
         response_message = ai_bot.invoke(
             history_messages=history_messages,
             question=combined_message,
             user_name=user_name,
         )
 
-        # Envia a resposta
         waha.send_message(chat_id=chat_id, message=response_message)
     except Exception as e:
         print(f"[ERRO] Falha ao processar mensagem: {str(e)}")
