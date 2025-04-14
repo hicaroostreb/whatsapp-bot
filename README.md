@@ -41,6 +41,7 @@ An intelligent chatbot for automated customer service via WhatsApp, leveraging G
 
     -   Webhook: `http://api:5000/chatbot/webhook/`
     -   WAHA API Swagger: `http://localhost:3000/`
+    -   WAHA Dashboard: `http://localhost:3000/dashboard`
 
 ---
 

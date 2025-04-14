@@ -1,11 +1,6 @@
-services:
-  waha:
-    image: devlikeapro/waha:latest
-    container_name: wpp_bot_waha
-    restart: always
-    ports:
-      - '3000:3000'
+version: '3.8'
 
+services:
   api:
     build:
       context: .
@@ -19,3 +14,18 @@ services:
       - S:/Code/gemini-api-453021-40c16f59f05d.json:/app/gemini-api-453021-40c16f59f05d.json
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/gemini-api-453021-40c16f59f05d.json
+
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: wpp_bot_waha
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./session_config.json:/app/session_config.json
+      - ./start_session.sh:/app/start_session.sh
+    command: sh -c "chmod +x /app/start_session.sh && /app/start_session.sh"
+    depends_on:
+      - api
+    environment:
+      - WAHA_URL=http://api:5000  # Atualize o nome do host para 'api'
