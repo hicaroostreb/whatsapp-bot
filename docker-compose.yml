@@ -7,13 +7,18 @@ services:
       dockerfile: Dockerfile.api
     container_name: wpp_bot_api
     ports:
-      - '5000:5000'
+      - '8000:8000'
     volumes:
       - .:/app
       - ./chroma_data:/app/chroma_data
+      - ./src/chatbot/core/bot_cache:/app/src/chatbot/core/bot_cache
       - S:/Code/gemini-api-453021-40c16f59f05d.json:/app/gemini-api-453021-40c16f59f05d.json
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/gemini-api-453021-40c16f59f05d.json
+    env_file:
+      - .env
+    networks:
+      - wpp_network
 
   waha:
     image: devlikeapro/waha:latest
@@ -25,7 +30,13 @@ services:
       - ./session_config.json:/app/session_config.json
       - ./start_session.sh:/app/start_session.sh
     command: sh -c "chmod +x /app/start_session.sh && /app/start_session.sh"
+    environment:
+      - WAHA_URL=http://wpp_bot_waha:3000
     depends_on:
       - api
-    environment:
-      - WAHA_URL=http://api:5000  # Atualize o nome do host para 'api'
+    networks:
+      - wpp_network
+
+networks:
+  wpp_network:
+    driver: bridge

@@ -1,16 +1,55 @@
 # Arquivos de cache e compilação
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
 # Ambiente virtual
+.venv/
+env/
 venv/
 
-# Arquivos de configuração local
+# Ferramentas de desenvolvimento locais (IDE)
 .vscode/
 .idea/
 
 # Arquivos de configuração sensíveis
 .env
-# Ignorar arquivos de credenciais
-*gemini-api-453021-40c16f59f05d.json
-*.env
+gemini-api-453021-40c16f59f05d.json
+
+# Logs e arquivos temporários de teste
+*.log
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+*.py,cover
+.pytest_cache/
+
+# Arquivos de distribuição / pacotes
+.Python
+build/
+dist/
+*.egg-info/
+
+# Arquivos de configuração do pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ferramentas de linter (caso esteja usando)
+.ruff_cache/
+
+# Ferramentas de análise de tipo (caso esteja usando)
+.mypy_cache/
+.pyre/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Arquivos temporários de IDE ou ferramentas de projeto
+.spyderproject
+.spyproject
+.ropeproject
+
+# Arquivos de configuração do sistema operacional (ex: MacOS, Windows)
+.DS_Store
+Thumbs.db

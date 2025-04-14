@@ -1,1 +1,35 @@
-venv
+# Arquivos e pastas do Python
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.log
+
+# Arquivos de backup
+*.bak
+
+# Ambientes virtuais
+env/
+venv/
+
+# Dependências locais
+*.egg-info/
+dist/
+build/
+
+# Arquivos de configuração do Git
+.git/
+.gitignore
+.gitmodules
+
+# Arquivos de configuração do IDE
+.idea/
+.vscode/
+*.iml
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Outros
+*.swp

@@ -4,7 +4,7 @@
       "metadata": {},
       "webhooks": [
         {
-          "url": "http://api:5000/chatbot/webhook/",
+          "url": "http://api:8000/chatbot/webhook/",
           "events": ["message"],
           "hmac": { "key": null },
           "retries": {

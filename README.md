@@ -35,11 +35,11 @@ An intelligent chatbot for automated customer service via WhatsApp, leveraging G
     docker-compose up --build api
     ```
 
-    The Flask backend will be accessible at: `http://localhost:5000`
+    The Flask backend will be accessible at: `http://localhost:8000`
 
-    Other services:
+    Other services: 
 
-    -   Webhook: `http://api:5000/chatbot/webhook/`
+    -   Webhook: `http://api:8000/chatbot/webhook/`
     -   WAHA API Swagger: `http://localhost:3000/`
     -   WAHA Dashboard: `http://localhost:3000/dashboard`
 

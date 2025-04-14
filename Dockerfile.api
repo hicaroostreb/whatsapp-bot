@@ -1,17 +1,26 @@
 FROM python:3.11-slim
 
+# Variáveis de ambiente básicas
 ENV PYTHONUNBUFFERED=1
 
+# Cria diretório de trabalho
 WORKDIR /app
-COPY requirements.txt requirements.txt
 
-RUN python -m pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Copia somente o requirements.txt primeiro, para aproveitar o cache do Docker
+COPY requirements.txt .
+
+# Instala as dependências do sistema
 RUN apt-get update && apt-get install -y build-essential
-RUN pip install google-generativeai
 
+# Atualiza o pip e instala as dependências
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Agora copia o restante do código
 COPY . .
 
-ENV FLASK_APP=app.py
-EXPOSE 5000
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000", "--debug"]
+# Expõe a porta da FastAPI
+EXPOSE 8000
+
+# Comando para rodar a FastAPI
+CMD ["uvicorn", "src.chatbot.main:app", "--host=0.0.0.0", "--port=8000", "--reload"]

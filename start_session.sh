@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WAHA_URL=http://localhost:3000
+WAHA_URL=http://wpp_bot_waha:3000
 SESSION_NAME=default
 CONFIG_PATH=/app/session_config.json
-EXPECTED_WEBHOOK="http://api:5000/chatbot/webhook/"
+EXPECTED_WEBHOOK="http://api:8000/chatbot/webhook/"
 
 # Aguardar o Waha estar no ar
 echo "⏳ Aguardando Waha..."
