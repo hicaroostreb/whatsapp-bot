@@ -8,7 +8,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCategory
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.globals import set_llm_cache
-from langchain.cache import SQLiteCache
+from langchain_community.cache import SQLiteCache
 
 os.environ["GEMINI_API_KEY"] = config("GEMINI_API_KEY")
 

@@ -1,0 +1,20 @@
+{
+    "name": "default",
+    "config": {
+      "metadata": {},
+      "webhooks": [
+        {
+          "url": "http://api:5000/chatbot/webhook/",
+          "events": ["message"],
+          "hmac": { "key": null },
+          "retries": {
+            "delaySeconds": 2,
+            "attempts": 15,
+            "policy": "exponential"
+          },
+          "customHeaders": null
+        }
+      ]
+    }
+  }
+  
