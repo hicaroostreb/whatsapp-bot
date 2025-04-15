@@ -21,11 +21,8 @@ services:
     restart: always
     ports:
       - '3000:3000'
-    volumes:
-      - ./session_config.json:/app/session_config.json
-      - ./start_session.sh:/app/start_session.sh
-    command: sh -c "chmod +x /app/start_session.sh && /app/start_session.sh"
     depends_on:
       - api
     environment:
-      - WAHA_URL=http://api:5000  # Atualize o nome do host para 'api'
+      - WAHA_URL=http://api:5000
+

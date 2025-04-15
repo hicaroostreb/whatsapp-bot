@@ -12,5 +12,5 @@ venv/
 # Arquivos de configuração sensíveis
 .env
 # Ignorar arquivos de credenciais
-*gemini-api-453021-40c16f59f05d.json
+gemini-api-453021-40c16f59f05d.json
 *.env
