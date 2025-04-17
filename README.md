@@ -25,14 +25,14 @@ An intelligent chatbot for automated customer service via WhatsApp, leveraging G
 1.  Clone the repository:
 
     ```bash
-    git clone https://github.com/seu-usuario/vexus-chatbot.git
+    git clone https://github.com/hicaroostreb/whatsapp-bot
     cd vexus-chatbot
     ```
 
 2.  Start the services:
 
     ```bash
-    docker-compose up --build api
+    docker-compose up --build 
     ```
 
     The Flask backend will be accessible at: `http://localhost:5000`
@@ -70,7 +70,7 @@ Payload:
 
 ---
 
-## 🧠 Special Command: `--zerar`
+## Special Command: `--zerar`
 
 Clears the chat history when a user sends `--zerar`. The bot returns:
 
@@ -79,6 +79,19 @@ Clears the chat history when a user sends `--zerar`. The bot returns:
 ```
 
 This command is not stored and prevents automatic AI responses.
+
+---
+
+
+## 🧠 Update RAG
+
+- Access the container:
+
+docker exec -it wpp_bot_api /bin/bash
+
+- Dentro do container
+
+python /app/rag/rag.py
 
 ---
 
